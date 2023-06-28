@@ -1,24 +1,30 @@
 import styles from './header.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 
-export function Header(){
-  const navigate = useNavigate();
-  const user = null;
+import { useSelector, useDispatch } from 'react-redux'
+import { logoutUser } from '../../redux/user/slice'
 
-  function handleLogin(){
-    navigate("/")
+export function Header() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { user } = useSelector(rootReducer => rootReducer.user)
+
+  function handleLogin() {
+    navigate('/')
   }
 
-  function handleLogout(){
+  function handleLogout() {
     dispatch(logoutUser())
-    navigate("/")
+    navigate('/')
   }
 
-  return(
+  return (
     <header>
       <div className={styles.content}>
         <Link to="/painel">
-          <h1>Dev<span>Redux</span></h1>
+          <h1>
+            Dev<span>Redux</span>
+          </h1>
         </Link>
 
         {user ? (
